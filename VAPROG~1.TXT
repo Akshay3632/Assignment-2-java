@@ -1,3 +1,14 @@
+Write a Java program to create a super class Employee (members-name, salary). Derive a sub-class as Developer (member- projectname). Derive a sub-class Programmer (member-proglanguage) from Developer. Create object of Developer and display the details of it. Implement this multilevel inheritance with appropriate constructor and methods.s
+
+
+
+
+
+
+
+
+
+
 class Employee {
     String name;
     double salary;
