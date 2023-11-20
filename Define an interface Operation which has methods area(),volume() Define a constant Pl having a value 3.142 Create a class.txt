@@ -1,0 +1,73 @@
+/ Define the Operation interface
+interface Operation {
+    double PI = 3.142; // Constant
+
+    double area();
+
+    double volume();
+}
+
+// Implement the Operation interface in the Circle class
+class Circle implements Operation {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return PI * radius * radius;
+    }
+
+    @Override
+    public double volume() {
+        // Circles don't have volume, so return 0 for this implementation
+        return 0;
+    }
+}
+
+// Implement the Operation interface in the Cylinder class
+class Cylinder implements Operation {
+    double radius;
+    double height;
+
+    Cylinder(double radius, double height) {
+        this.radius = radius;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return 2 * PI * radius * (radius + height);
+    }
+
+    @Override
+    public double volume() {
+        return PI * radius * radius * height;
+    }
+}
+
+// Main class to test the Circle and Cylinder classes
+public class Main {
+    public static void main(String[] args) {
+        // Create a circle with a radius of 5 units
+        Circle circle = new Circle(5);
+
+        // Calculate and display the area of the circle
+        System.out.println("Area of Circle: " + circle.area());
+
+        // Create a cylinder with a radius of 3 units and height of 8 units
+        Cylinder cylinder = new Cylinder(3, 8);
+
+        // Calculate and display the area and volume of the cylinder
+        System.out.println("Area of Cylinder: " + cylinder.area());
+        System.out.println("Volume of Cylinder: " + cylinder.volume());
+    }
+}
+
+ouyput:-
+
+Area of Circle: 78.55
+Area of Cylinder: 150.796
+Volume of Cylinder: 226.194

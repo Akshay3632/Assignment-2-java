@@ -1,0 +1,53 @@
+//Create a folder named utility and save the following file inside it.
+
+//CapitalString.java:
+
+
+package utility;
+
+public class CapitalString {
+    public static String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1);
+    }
+}
+
+
+//Person.java (outside the package):
+
+
+import utility.CapitalString;
+
+public class Person {
+    private String name;
+    private String city;
+
+    public Person(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public void displayNameWithCapital() {
+        String capitalizedFirstName = CapitalString.capitalizeFirstLetter(name);
+        System.out.println("Name: " + capitalizedFirstName);
+        System.out.println("City: " + city);
+    }
+
+    // Other methods for the Person class (if needed)
+}
+
+
+//Main.java (to test the classes):
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a person object
+        Person person = new Person("john", "New York");
+
+        // Displaying the person name with the first letter as capital
+        person.displayNameWithCapital();
+    }
+}

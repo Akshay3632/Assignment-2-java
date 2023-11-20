@@ -1,0 +1,160 @@
+import java.util.Scanner;
+
+abstract class Staff {
+    String name;
+    String address;
+
+    Staff(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    abstract double calculateSalary();
+
+    void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Address: " + address);
+    }
+}
+
+class FullTimeStaff extends Staff {
+    String department;
+    double salary;
+
+    FullTimeStaff(String name, String address, String department, double salary) {
+        super(name, address);
+        this.department = department;
+        this.salary = salary;
+    }
+
+    @Override
+    double calculateSalary() {
+        double hra = 0.08 * salary;
+        double da = 0.05 * salary;
+        return salary + hra + da;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Department: " + department);
+        System.out.println("Salary: " + salary);
+        System.out.println("Calculated Salary: " + calculateSalary());
+    }
+}
+
+class PartTimeStaff extends Staff {
+    int numberOfHours;
+    double ratePerHour;
+
+    PartTimeStaff(String name, String address, int numberOfHours, double ratePerHour) {
+        super(name, address);
+        this.numberOfHours = numberOfHours;
+        this.ratePerHour = ratePerHour;
+    }
+
+    @Override
+    double calculateSalary() {
+        return numberOfHours * ratePerHour;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Number of Hours: " + numberOfHours);
+        System.out.println("Rate per Hour: " + ratePerHour);
+        System.out.println("Calculated Salary: " + calculateSalary());
+    }
+}
+
+public class StaffMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of staff members (n): ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // consume the newline
+
+        Staff[] staffMembers = new Staff[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for Staff Member " + (i + 1) + ":");
+            System.out.print("Enter Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter Address: ");
+            String address = scanner.nextLine();
+            System.out.print("Enter Staff Type (1 for Full Time, 2 for Part Time): ");
+            int staffType = scanner.nextInt();
+            scanner.nextLine(); // consume the newline
+
+            if (staffType == 1) {
+                System.out.print("Enter Department: ");
+                String department = scanner.nextLine();
+                System.out.print("Enter Salary: ");
+                double salary = scanner.nextDouble();
+                staffMembers[i] = new FullTimeStaff(name, address, department, salary);
+            } else if (staffType == 2) {
+                System.out.print("Enter Number of Hours: ");
+                int numberOfHours = scanner.nextInt();
+                System.out.print("Enter Rate per Hour: ");
+                double ratePerHour = scanner.nextDouble();
+                staffMembers[i] = new PartTimeStaff(name, address, numberOfHours, ratePerHour);
+            } else {
+                System.out.println("Invalid Staff Type. Please enter 1 for Full Time or 2 for Part Time.");
+                i--; // Decrement i to retry entering details for this staff member
+            }
+        }
+
+        System.out.println("\nDetails of Full Time Staff:");
+        for (Staff staff : staffMembers) {
+            if (staff instanceof FullTimeStaff) {
+                staff.displayDetails();
+                System.out.println("--------------------------");
+            }
+        }
+
+        System.out.println("\nDetails of Part Time Staff:");
+        for (Staff staff : staffMembers) {
+            if (staff instanceof PartTimeStaff) {
+                staff.displayDetails();
+                System.out.println("--------------------------");
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+output:-
+
+
+Enter the number of staff members (n): 2
+
+Enter details for Staff Member 1:
+Enter Name: John Doe
+Enter Address: 123 Main St
+Enter Staff Type (1 for Full Time, 2 for Part Time): 1
+Enter Department: IT
+Enter Salary: 60000
+
+Enter details for Staff Member 2:
+Enter Name: Jane Smith
+Enter Address: 456 Oak St
+Enter Staff Type (1 for Full Time, 2 for Part Time): 2
+Enter Number of Hours: 20
+Enter Rate per Hour: 15
+
+Details of Full Time Staff:
+Name: John Doe
+Address: 123 Main St
+Department: IT
+Salary: 60000.0
+Calculated Salary: 68400.0
+--------------------------
+Details of Part Time Staff:
+Name: Jane Smith
+Address: 456 Oak St
+Number of Hours: 20
+Rate per Hour: 15.0
+Calculated Salary: 300.0
+--------------------------

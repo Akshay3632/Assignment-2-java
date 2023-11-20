@@ -1,0 +1,63 @@
+class Employee {
+    String name;
+    double salary;
+
+    Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    void displayDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+    }
+}
+
+class Developer extends Employee {
+    String projectName;
+
+    Developer(String name, double salary, String projectName) {
+        super(name, salary);
+        this.projectName = projectName;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Project Name: " + projectName);
+    }
+}
+
+class Programmer extends Developer {
+    String progLanguage;
+
+    Programmer(String name, double salary, String projectName, String progLanguage) {
+        super(name, salary, projectName);
+        this.progLanguage = progLanguage;
+    }
+
+    @Override
+    void displayDetails() {
+        super.displayDetails();
+        System.out.println("Programming Language: " + progLanguage);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an object of Programmer
+        Programmer programmer = new Programmer("John Doe", 60000, "ProjectX", "Java");
+
+        // Display details of the Programmer
+        System.out.println("Details of Programmer:");
+        programmer.displayDetails();
+    }
+}
+
+output:-
+
+Details of Programmer:
+Name: John Doe
+Salary: 60000.0
+Project Name: ProjectX
+Programming Language: Java

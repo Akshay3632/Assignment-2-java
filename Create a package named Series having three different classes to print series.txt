@@ -1,0 +1,74 @@
+// fiboncci series
+
+
+package Series;
+
+public class Fibonacci {
+    public static void generateSeries(int n) {
+        int firstTerm = 0, secondTerm = 1;
+        System.out.println("Fibonacci Series:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(firstTerm + " ");
+            int nextTerm = firstTerm + secondTerm;
+            firstTerm = secondTerm;
+            secondTerm = nextTerm;
+        }
+        System.out.println();
+    }
+}
+
+//CubeSeries.java
+
+package Series;
+
+public class CubeSeries {
+    public static void generateSeries(int n) {
+        System.out.println("Cube Series:");
+        for (int i = 1; i <= n; i++) {
+            System.out.print((int) Math.pow(i, 3) + " ");
+        }
+        System.out.println();
+    }
+}
+
+
+//SquareSeries.java:
+
+
+package Series;
+
+public class SquareSeries {
+    public static void generateSeries(int n) {
+        System.out.println("Square Series:");
+        for (int i = 1; i <= n; i++) {
+            System.out.print((int) Math.pow(i, 2) + " ");
+        }
+        System.out.println();
+    }
+}
+
+
+//SeriesMain.java:
+
+
+import java.util.Scanner;
+import Series.*;
+
+public class SeriesMain {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the value of n: ");
+        int n = scanner.nextInt();
+
+        Fibonacci.generateSeries(n);
+        CubeSeries.generateSeries(n);
+        SquareSeries.generateSeries(n);
+
+        scanner.close();
+    }
+}
+
+output:-
+
+ 
